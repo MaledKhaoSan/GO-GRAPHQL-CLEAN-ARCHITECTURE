@@ -1,0 +1,16 @@
+# gqlgen.yml
+schema:
+  - internal/adapters/graph/schema.graphqls
+
+exec:
+  filename: internal/adapters/graph/generated/generated.go
+  package: generated
+
+model:
+  filename: internal/adapters/graph/model/models_gen.go
+  package: model
+
+resolver:
+  layout: follow-schema
+  dir: internal/adapters/graph
+  package: graph

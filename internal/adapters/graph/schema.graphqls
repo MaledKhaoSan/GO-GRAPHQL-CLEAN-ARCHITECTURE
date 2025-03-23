@@ -1,0 +1,53 @@
+# Entity Types
+
+type Author {
+  id: ID!
+  name: String!
+  country: String
+  books: [Book!]!     # ← many-to-many
+}
+
+type Book {
+  id: ID!
+  title: String!
+  publishedYear: Int
+  authors: [Author!]! # ← many-to-many
+}
+
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  borrowedBooks: [Book!]! # ← many-to-many from books_borrow
+}
+
+type BooksBorrow {
+    id: ID!
+    user: User!
+    book: Book!
+    borrowedAt: String!
+}
+
+type BorrowStat {
+  book: Book!
+  borrowCount: Int!
+}
+
+
+# Queries
+type Query {
+    authors: [Author!]!
+    author(id: ID!): Author
+
+    books: [Book!]!
+    book(id: ID!): Book
+
+    users: [User!]!
+    user(id: ID!): User
+
+    booksByAuthor(authorId: ID!): [Book!]!
+    booksBorrow: [BooksBorrow!]!
+    booksBorrowHistoryByUser(userId: ID!): [BooksBorrow!]!
+    booksBorrowStatByAuthor(authorId: ID!): [BorrowStat!]!
+}
+
